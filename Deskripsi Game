@@ -1,0 +1,742 @@
+Game ini dibuat pakai Next.js
+BE - Supabase
+Deploy - Netlify
+
+Deskripsi Lengkap Game EduQuest
+GAME DESIGN DOCUMENT · KONSEP & RANCANGAN MVP
+EduQuest
+Learn, Play, Grow!
+
+EduQuest adalah game edukasi berbasis web yang menggabungkan kegiatan belajar, kuis interaktif, pengumpulan reward, dan kustomisasi karakter. Game ini dirancang untuk membuat proses belajar terasa lebih menyenangkan, khususnya bagi anak-anak usia sekolah.
+
+Pemain akan memiliki karakter chibi sendiri, mengikuti kuis dari berbagai mata pelajaran, mendapatkan Coins dari jawaban benar, lalu menggunakan Coins tersebut untuk membeli berbagai aksesoris dan pakaian karakter.
+
+Guru atau Admin berperan sebagai pengelola konten pembelajaran: membuat mata pelajaran, kategori, bank soal, tingkat kesulitan, dan pengaturan kuis.
+1. Konsep utama game
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+10
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+EduQuest bukan game petualangan dengan dunia 3D yang harus dijelajahi. Navigasi menggunakan menu sehingga pemain bisa langsung memilih aktivitas yang ingin dilakukan.
+
+Ada empat pilar utama:
+1. Learn — Belajar melalui kuis dari berbagai mata pelajaran.
+2. Play — Mengikuti tantangan dan mengumpulkan pencapaian.
+3. Earn — Mendapatkan Coins dari jawaban yang benar.
+4. Customize — Mengembangkan penampilan karakter dengan item kosmetik.
+Karakter hanya berfungsi sebagai representasi visual pemain. Aksesoris, pakaian, dan perlengkapan tidak memberikan keuntungan dalam menjawab soal.
+2. Jenis pengguna dan hak akses
+EduQuest memiliki dua jenis pengguna utama.
+A. Student (Pemain)
+Setiap orang dapat mendaftar sebagai Student.
+
+Fitur yang tersedia:
+- Membuat akun dan login.
+- Memiliki karakter chibi pribadi.
+- Mengubah penampilan karakter.
+- Mengunjungi Shop.
+- Membeli dan mengoleksi item.
+- Memilih mata pelajaran dan kategori.
+- Mengikuti kuis.
+- Mendapatkan Coins dari jawaban benar.
+- Melihat hasil dan riwayat kuis.
+- Melihat pencapaian pribadi.
+B. Teacher / Admin
+Teacher dan Admin memiliki akses pengelolaan sistem pembelajaran.
+
+Fitur yang tersedia:
+- Mengelola mata pelajaran.
+- Mengelola kategori.
+- Membuat, mengubah, dan menghapus soal.
+- Mengatur tingkat kesulitan soal.
+- Mengatur status soal Draft atau Published.
+- Mengatur jumlah soal dalam kuis.
+- Mengatur komposisi tingkat kesulitan.
+- Mengatur reward Coins.
+- Melihat hasil dan aktivitas siswa.
+- Mengelola data siswa sesuai hak akses.
+Akun Teacher/Admin tidak menggunakan pendaftaran siswa biasa. Pemberian hak akses harus dilakukan secara terkontrol.
+3. Struktur menu utama
+
+
+
+
+
+
+
+
+kidsacademy.mobi
+
+
+Menu utama yang direncanakan:
+Menu	Fungsi
+Home	Dashboard dan ringkasan aktivitas
+Character	Melihat dan mengubah karakter
+Shop	Membeli pakaian dan aksesoris
+Quiz / Soal	Memilih mata pelajaran dan mengerjakan kuis
+Leaderboard	Melihat peringkat pemain (pengembangan lanjutan)
+
+Pada dashboard, pemain dapat melihat:
+- Karakter yang sedang digunakan.
+- Jumlah Coins.
+- Ringkasan kuis yang telah dikerjakan.
+- Aktivitas atau pencapaian terakhir.
+- Tombol untuk mulai belajar.
+4. Sistem karakter (Avatar)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+10
+
+
+
+
+
+
+
+
+
+
+
+Setiap pemain mempunyai satu karakter chibi yang dapat dikustomisasi.
+
+Karakter menggunakan sistem layered 2D, yaitu beberapa gambar transparan yang ditumpuk menjadi satu tampilan karakter.
+
+Bagian karakter yang dapat diubah:
+Bagian	Contoh item
+Rambut	Pendek, panjang, keriting
+Atasan	Kaos, kemeja, hoodie
+Bawahan	Celana, rok
+Sepatu	Sneakers, sepatu formal
+Aksesoris kepala	Topi, jepit rambut
+Aksesoris wajah	Kacamata
+Aksesoris punggung	Tas, sayap dekoratif
+
+Sistem karakter:
+- Setiap pemain memiliki karakter sendiri.
+- Item yang dimiliki disimpan dalam inventory.
+- Pemain dapat mengganti item kapan saja.
+- Item yang belum dibeli tidak dapat digunakan.
+- Perubahan karakter hanya memengaruhi penampilan, bukan kemampuan akademik.
+Untuk MVP, cukup sediakan satu karakter dasar dengan sekitar 10–15 item awal.
+5. Sistem Shop dan Coins
+
+
+
+
+
+
+
+
+ddooo.com
+
+
+Shop adalah tempat pemain menggunakan Coins untuk membeli item kosmetik.
+
+Sumber Coins
+
+Coins didapatkan dari hasil menjawab soal dengan benar.
+
+Contoh:
+- Jawaban benar: mendapatkan reward sesuai pengaturan kuis.
+- Jawaban salah: tidak mendapatkan Coins.
+- Menyelesaikan kuis: mendapatkan hasil dan rekap reward.
+Alur pembelian item
+1. Pemain membuka Shop.
+2. Memilih item.
+3. Melihat preview karakter menggunakan item tersebut.
+4. Membeli item jika Coins mencukupi.
+5. Coins dipotong.
+6. Item masuk ke inventory.
+7. Pemain dapat langsung menggunakan item.
+Setiap transaksi pembelian harus tercatat agar saldo Coins dan kepemilikan item tetap konsisten.
+6. Sistem mata pelajaran dan kategori
+
+
+
+
+
+
+
+
+groupon.com
+
+
+Mata pelajaran dan kategori bersifat dinamis, artinya tidak ditentukan secara permanen oleh sistem.
+
+Guru/Admin dapat menambahkan mata pelajaran baru sesuai kebutuhan.
+
+Contoh struktur awal:
+Matematika
+
+- Operasi Hitung
+- Pecahan
+- Desimal
+- Persentase
+- Perbandingan
+- Bangun Datar
+- Bangun Ruang
+
+
+IPA
+
+- Makhluk Hidup
+- Sistem Tata Surya
+- Energi
+- Lingkungan
+
+
+Bahasa Indonesia
+
+- Teks Bacaan
+- Sinonim dan Antonim
+- Tata Bahasa
+- Ide Pokok
+
+Contoh ilustrasi. Pada awal MVP, Matematika menjadi mata pelajaran pertama.
+Strukturnya:
+
+Mata Pelajaran → Kategori → Kuis → Hasil
+
+Guru/Admin dapat:
+- Menambahkan mata pelajaran.
+- Mengubah nama dan deskripsi mata pelajaran.
+- Mengaktifkan atau menonaktifkan mata pelajaran.
+- Membuat kategori di dalam mata pelajaran.
+- Mengubah dan mengelola kategori.
+Siswa hanya dapat melihat mata pelajaran dan kategori yang aktif serta memiliki kuis yang tersedia.
+7. Sistem bank soal
+
+
+
+
+
+
+
+
+help.learnosity.com
+
+
+Semua soal dibuat dan dikelola oleh Guru/Admin melalui halaman Bank Soal.
+Informasi setiap soal
+Field	Keterangan
+Mata Pelajaran	Induk mata pelajaran
+Kategori	Kategori soal
+Pertanyaan	Isi pertanyaan
+Pilihan A	Jawaban pertama
+Pilihan B	Jawaban kedua
+Pilihan C	Jawaban ketiga
+Pilihan D	Jawaban keempat
+Jawaban Benar	Kunci jawaban
+Tingkat Kesulitan	Mudah, Sedang, Sulit
+Pembahasan	Penjelasan jawaban (opsional)
+Status	Draft / Published
+
+Tingkat kesulitan soal
+Setiap soal wajib memiliki satu tingkat kesulitan.
+Mudah
+Easy
+
+Soal dasar, menguji pemahaman konsep sederhana.
+Sedang
+Medium
+
+Soal yang membutuhkan pemahaman dan beberapa langkah penyelesaian.
+Sulit
+Hard
+
+Soal yang membutuhkan analisis, penalaran, atau penyelesaian lebih kompleks.
+Status soal
+- Draft: Soal masih disusun dan belum dapat digunakan siswa.
+- Published: Soal sudah siap dan dapat dipilih oleh sistem kuis.
+Hanya soal Published yang dapat muncul dalam kuis siswa.
+8. Sistem kuis dan pengacakan soal
+
+
+
+
+
+
+
+
+splashlearn.com
+
+
+Ini merupakan salah satu fitur utama EduQuest.
+
+Sistem kuis menggunakan pengambilan soal secara acak dari bank soal yang telah dibuat Guru/Admin.
+A. Pengaturan kuis oleh Guru/Admin
+Setiap kategori memiliki konfigurasi kuis sendiri.
+
+Contoh:
+Pengaturan Kuis
+MATA PELAJARAN
+
+Matematika
+
+KATEGORI
+
+Pecahan
+
+JUMLAH SOAL
+10 soal
+
+
+Komposisi tingkat kesulitan
+Mudah
+
+4 soal
+
+
+
+
+Sedang
+
+4 soal
+
+
+
+
+Sulit
+
+2 soal
+
+
+
+
+
+Reward per jawaban benar
+10 Coins
+
+Contoh konfigurasi, bukan nilai yang sudah ditetapkan secara permanen.
+Guru/Admin dapat mengatur:
+- Jumlah soal yang harus dikerjakan.
+- Jumlah soal mudah.
+- Jumlah soal sedang.
+- Jumlah soal sulit.
+- Reward Coins untuk setiap jawaban benar.
+- Status kuis aktif atau tidak aktif.
+Jumlah ketiga tingkat kesulitan harus sama dengan jumlah total soal.
+B. Pengambilan soal secara acak
+Misalnya dalam database tersedia:
+- 20 soal kategori Pecahan.
+- 10 soal mudah.
+- 6 soal sedang.
+- 4 soal sulit.
+Guru/Admin mengatur kuis dengan 10 soal: 4 mudah, 4 sedang, dan 2 sulit.
+
+Maka sistem akan:
+1. Memilih 4 soal mudah secara acak.
+2. Memilih 4 soal sedang secara acak.
+3. Memilih 2 soal sulit secara acak.
+4. Menggabungkan seluruh soal.
+5. Mengacak urutan soal.
+6. Mengacak urutan pilihan jawaban jika konfigurasi mendukungnya.
+7. Menyimpan kumpulan soal untuk sesi kuis tersebut.
+Contoh pengacakan
+
+BANK SOAL · 20 SOAL
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+7
+
+8
+
+9
+
+10
+
+11
+
+12
+
+13
+
+14
+
+15
+
+16
+
+17
+
+18
+
+19
+
+20
+
+
+Ilustrasi bank soal, bukan urutan pengambilan sebenarnya.
+SOAL YANG DIPILIH UNTUK SATU SESI
+7
+Soal 1
+
+2
+Soal 2
+
+14
+Soal 3
+
+18
+Soal 4
+
+5
+Soal 5
+
+12
+Soal 6
+
+1
+Soal 7
+
+16
+Soal 8
+
+9
+Soal 9
+
+20
+Soal 10
+
+
+10 soal terpilih secara acak
+
+Aturan penting:
+- Satu soal tidak boleh muncul dua kali dalam satu sesi.
+- Setiap pemain bisa mendapatkan kombinasi soal yang berbeda.
+- Soal yang sudah dipilih harus tetap sama meskipun halaman di-refresh.
+- Jika soal yang tersedia tidak mencukupi komposisi yang ditentukan, kuis tidak dapat dimulai.
+- Sistem memberi tahu Guru/Admin bagian mana yang kekurangan soal.
+9. Gameplay dan alur bermain siswa
+Berikut alur utama pemain dari awal masuk hingga menyelesaikan kuis.
+1. Login / Register
+   
+   Pemain membuat akun dan masuk ke EduQuest.
+2. Home
+   
+   Pemain melihat karakter, Coins, dan menu utama.
+3. Pilih Quiz
+   
+   Pemain memilih mata pelajaran.
+4. Pilih Kategori
+   
+   Pemain memilih kategori yang ingin dikerjakan.
+5. Mulai Kuis
+   
+   Sistem mengambil soal secara acak sesuai pengaturan Guru/Admin.
+6. Jawab Pertanyaan
+   
+   Pemain memilih satu dari empat jawaban.
+7. Hasil Kuis
+   
+   Sistem menghitung jawaban benar, salah, dan Coins yang diperoleh.
+8. Gunakan Coins
+   
+   Pemain bisa mengunjungi Shop untuk membeli item karakter.
+
+Contoh tampilan kuis
+Matematika · Pecahan
+Soal 3 / 10
+
+
+
+Berapakah hasil dari ½ + ¼?
+A½B¾C⅔D1
+Contoh pilih jawabanIlustrasi interaktif tampilan pilihan jawaban. Belum terhubung ke sistem penilaian.
+10. Sistem penilaian dan reward
+Setiap jawaban diperiksa oleh sistem.
+- Jawaban benar: mendapatkan Coins sesuai konfigurasi.
+- Jawaban salah: tidak mendapatkan Coins.
+- Setiap jawaban hanya boleh menghasilkan reward satu kali.
+- Hasil kuis disimpan dalam riwayat pemain.
+Contoh:
+Keterangan	Hasil
+Total soal	10
+Jawaban benar	8
+Jawaban salah	2
+Reward per jawaban benar	10 Coins
+Total Coins diperoleh	80 Coins
+
+Rumus:
+\[
+\text{Coins} = \text{Jawaban Benar} \times \text{Reward}
+\]
+
+Hasil kuis dapat menampilkan:
+- Total soal.
+- Jumlah jawaban benar.
+- Jumlah jawaban salah.
+- Persentase nilai.
+- Total Coins diperoleh.
+- Pembahasan jawaban (jika disediakan Guru/Admin).
+11. Dashboard Guru/Admin
+
+
+
+
+
+
+
+
+dribbble.com
+
+
+Guru/Admin memiliki dashboard terpisah dari dashboard siswa.
+Menu Admin	Fungsi
+Dashboard	Ringkasan aktivitas pembelajaran
+Mata Pelajaran	CRUD mata pelajaran
+Kategori	CRUD kategori per mata pelajaran
+Bank Soal	Membuat dan mengelola soal
+Pengaturan Kuis	Mengatur jumlah, kesulitan, reward
+Data Siswa	Melihat data akun siswa
+Hasil Kuis	Melihat nilai dan hasil pengerjaan
+Aktivitas	Memantau aktivitas siswa
+
+Informasi yang dapat ditampilkan:
+- Jumlah siswa terdaftar.
+- Jumlah mata pelajaran aktif.
+- Jumlah kategori.
+- Jumlah soal Draft dan Published.
+- Jumlah kuis yang dikerjakan.
+- Rata-rata nilai siswa.
+- Rekap hasil per mata pelajaran dan kategori.
+- Riwayat pengerjaan masing-masing siswa.
+12. Struktur database dan teknologi
+Untuk mendukung seluruh fitur di atas, berikut rancangan teknologi yang direkomendasikan.
+Arsitektur EduQuest
+Browser
+HP, laptop, dan desktop
+
+Next.js + TypeScript
+UI, halaman, dan aplikasi game
+
+Supabase
+Authentication · PostgreSQL · Storage · RPC
+
+GitHub
+Penyimpanan kode
+
+Netlify
+Hosting aplikasi
+
+
+
+Teknologi yang digunakan
+Teknologi	Kegunaan
+Next.js	Framework aplikasi web
+TypeScript	Bahasa pemrograman
+Tailwind CSS	Styling UI
+Zustand	State management
+Supabase Auth	Login dan registrasi
+Supabase PostgreSQL	Database
+Supabase Storage	Penyimpanan gambar
+PostgreSQL RPC	Proses kuis dan transaksi yang aman
+GitHub	Repository kode
+Netlify	Deploy aplikasi
+
+Rancangan tabel database
+Tabel	Kegunaan
+profiles	Data akun dan role pengguna
+player_characters	Data karakter pemain
+items	Katalog item Shop
+player_inventory	Item yang dimiliki
+player_equipment	Item yang sedang digunakan
+subjects	Mata pelajaran
+question_categories	Kategori soal
+questions	Data pertanyaan
+question_options	Empat pilihan jawaban dan kunci
+quiz_settings	Pengaturan kuis
+quiz_attempts	Sesi pengerjaan kuis
+quiz_attempt_questions	Daftar soal terpilih dan urutannya
+quiz_responses	Jawaban siswa
+coin_transactions	Riwayat Coins masuk dan keluar
+
+Keamanan sistem
+Ada beberapa hal penting yang harus diterapkan:
+1. Siswa tidak boleh dapat mengakses kunci jawaban melalui browser.
+2. Perhitungan nilai dan Coins harus divalidasi di server/database.
+3. Siswa hanya dapat melihat data pribadi miliknya.
+4. Guru/Admin hanya dapat mengelola konten sesuai hak akses.
+5. Pembelian item harus memvalidasi saldo dan kepemilikan.
+6. Reward tidak boleh diberikan berulang untuk jawaban yang sama.
+7. Pengambilan soal acak harus disimpan agar tidak berubah ketika halaman di-refresh.
+Dengan demikian, siswa tidak bisa memanipulasi saldo Coins atau mengirim nilai sendiri dari browser.
+13. Rancangan MVP (versi pertama)
+Agar pengembangan tidak terlalu besar, sebaiknya EduQuest dibangun secara bertahap.
+Target MVP
+Tahap	Fitur	Prioritas
+1	Login, register, role	Wajib
+2	Dashboard siswa dan Admin	Wajib
+3	Mata pelajaran dan kategori dinamis	Wajib
+4	Bank soal dan empat pilihan jawaban	Wajib
+5	Tingkat kesulitan soal	Wajib
+6	Pengaturan kuis dan pengacakan soal	Wajib
+7	Penilaian dan Coins	Wajib
+8	Avatar chibi dan kustomisasi	Wajib
+9	Shop dan inventory	Wajib
+10	Riwayat dan laporan hasil kuis	Wajib
+11	Leaderboard	Pengembangan lanjutan
+12	Achievement dan badge	Pengembangan lanjutan
+13	Event dan tantangan harian	Pengembangan lanjutan
+
+Batasan MVP yang disarankan
+Untuk versi pertama:
+- Satu karakter dasar.
+- 10–15 item kosmetik.
+- Mata pelajaran awal: Matematika.
+- Beberapa kategori Matematika.
+- Sistem pilihan ganda empat jawaban.
+- Tiga tingkat kesulitan.
+- Kuis dengan soal acak.
+- Reward Coins.
+- Shop sederhana.
+Fitur dapat diperluas setelah alur utama berjalan stabil.
+14. Estimasi struktur folder project
+eduquest/
+├── public/
+│   └── assets/
+│       ├── avatar/
+│       │   ├── base/
+│       │   ├── hair/
+│       │   ├── outfits/
+│       │   ├── shoes/
+│       │   └── accessories/
+│       ├── items/
+│       ├── icons/
+│       └── sounds/
+│
+├── src/
+│   ├── app/
+│   │   ├── login/
+│   │   ├── register/
+│   │   ├── (student)/
+│   │   │   ├── home/
+│   │   │   ├── character/
+│   │   │   ├── shop/
+│   │   │   └── quiz/
+│   │   └── (admin)/
+│   │       └── admin/
+│   │           ├── dashboard/
+│   │           ├── subjects/
+│   │           ├── categories/
+│   │           ├── questions/
+│   │           ├── quiz-settings/
+│   │           ├── students/
+│   │           └── results/
+│   │
+│   ├── components/
+│   │   ├── avatar/
+│   │   ├── shop/
+│   │   ├── quiz/
+│   │   ├── dashboard/
+│   │   └── ui/
+│   │
+│   ├── stores/
+│   │   ├── useAuthStore.ts
+│   │   ├── useCharacterStore.ts
+│   │   └── useQuizStore.ts
+│   │
+│   ├── lib/
+│   │   └── supabase/
+│   └── types/
+│
+└── supabase/
+    ├── migrations/
+    └── functions/
+
+
+15. Strategi deployment dan biaya
+EduQuest dirancang agar bisa dimulai dengan layanan gratis.
+Layanan	Rencana
+GitHub	Free
+Netlify	Free
+Supabase	Free
+Domain	Bisa menggunakan subdomain gratis terlebih dahulu
+Asset karakter	Menggunakan aset sendiri atau aset berlisensi sesuai kebutuhan
+
+Untuk MVP dengan penggunaan terbatas, kombinasi ini cukup masuk akal. Namun, layanan gratis tetap memiliki batas penggunaan, penyimpanan, dan kapasitas. Perlu pemantauan jika jumlah siswa dan aktivitas meningkat.
+
+16. Visi pengembangan EduQuest
+EduQuest bisa dikembangkan menjadi platform pembelajaran berbasis game yang lebih luas.
+
+Beberapa kemungkinan fitur berikutnya:
+- Banyak mata pelajaran dan jenjang kelas.
+- Level pemain berdasarkan aktivitas belajar.
+- Achievement untuk pencapaian tertentu.
+- Leaderboard kelas atau sekolah.
+- Tantangan harian dan mingguan.
+- Event belajar dengan reward khusus.
+- Statistik perkembangan belajar siswa.
+- Pengelompokan siswa berdasarkan kelas.
+- Guru dapat membuat kuis khusus untuk kelasnya.
+Namun, fondasi awal tetap harus berfokus pada tiga hal: bank soal yang terkelola, kuis yang berjalan dengan benar, dan sistem reward yang aman.
+Kesimpulan konsep
+EduQuest
+Learn, Play, Grow!
+
+Game edukasi berbasis web dengan karakter chibi yang dapat dikustomisasi, sistem kuis pilihan ganda dari berbagai mata pelajaran, pengacakan soal berdasarkan tingkat kesulitan, serta sistem Coins untuk membeli item kosmetik.
+
+Siswa belajar dan bermain. Guru mengelola pembelajaran. Sistem memberikan reward atas proses belajar.
